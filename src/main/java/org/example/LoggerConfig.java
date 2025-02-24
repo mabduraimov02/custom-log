@@ -1,6 +1,5 @@
 package org.example;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -9,10 +8,13 @@ import java.util.Properties;
  * Чтение конфигурации
  */
 public class LoggerConfig {
-    private static Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
     static {
-        try (InputStream input = new FileInputStream("logger.properties")) {
+        try (InputStream input = LoggerConfig.class.getClassLoader().getResourceAsStream("logger.properties")) {
+            if (input == null) {
+                throw new IOException("Файл logger.properties не найден в resources/");
+            }
             properties.load(input);
         } catch (IOException e) {
             e.printStackTrace();

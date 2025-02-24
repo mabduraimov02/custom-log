@@ -46,7 +46,6 @@ class LoggerTest {
     void testLogInfo() throws IOException {
         logger.logInfo("Test INFO message");
 
-        // Проверяем, что сообщение записано в файл
         assertTrue(Files.exists(logFilePath), "Файл лога должен существовать");
         String content = Files.readString(logFilePath);
         assertTrue(content.contains("INFO"), "Лог должен содержать уровень INFO");
@@ -59,7 +58,6 @@ class LoggerTest {
 
         Thread.sleep(100); // Ждем завершения записи
 
-        // Проверяем, что сообщение записано в файл
         String content = Files.readString(logFilePath);
         assertTrue(content.contains("WARNING"), "Лог должен содержать уровень WARNING");
         assertTrue(content.contains("Test WARNING message"), "Лог должен содержать сообщение");
@@ -71,7 +69,6 @@ class LoggerTest {
 
         Thread.sleep(100); // Ждем завершения записи
 
-        // Проверяем, что сообщение записано в файл
         String content = Files.readString(logFilePath);
         assertTrue(content.contains("ERROR"), "Лог должен содержать уровень ERROR");
         assertTrue(content.contains("Test ERROR message"), "Лог должен содержать сообщение");
